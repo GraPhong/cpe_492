@@ -1,0 +1,29 @@
+.grid-container {
+	display: grid;
+	grid-template-areas: 
+	  "input input"
+	  "course-list checkbox"
+	  "course-list checkbox"
+	  "course-list checkbox";
+	grid-template-columns: 85% 15%;
+	grid-template-rows: auto 1fr 1fr 1fr;
+	gap: 10px;
+	padding: 20px;
+  }
+  
+  .search {
+	grid-area: input;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #000;
+	border-radius: 5px;
+  }
+  
+  .course-list-container {
+	grid-area: course-list;
+  }
+  
+  .checkbox-container {
+	grid-area: checkbox;
+  }
+  
