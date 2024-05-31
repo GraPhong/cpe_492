@@ -3,6 +3,7 @@ import CourseList from "@/components/CourseList.tsx";
 import CheckBox from "./CheckBox";
 import "./TableResultSearch.css";
 import SearchInput from "./SearchInput";
+import SearchSuggestion from "../SearchSuggestion";
 
 const TableResultSearch = () => {
   const [query, setQuery] = useState("");

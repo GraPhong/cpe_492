@@ -8,7 +8,7 @@ const InputSearch = () => {
       </div>
       <div className="flex space-x-4">
         <div className="flex rounded-md overflow-hidden w-full">
-          <input type="text" className="w-full rounded-md rounded-r-none" />
+          <input type="text" placeholder="Search..." className="w-full rounded-md rounded-r-none" />
           <button className="bg-indigo-600 text-white px-6 text-lg font-semibold py-4 rounded-r-md">Go</button>
         </div>
       </div>

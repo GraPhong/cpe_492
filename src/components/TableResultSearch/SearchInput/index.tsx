@@ -7,12 +7,16 @@ interface SearchInputProps {
 
 const SearchInput: FC<SearchInputProps> = ({ query, setQuery }) => {
   return (
-    <input
+    <div className="flex">
+      
+      <input
       className="search"
       placeholder="Search..."
       value={query}
       onChange={(e) => setQuery(e.target.value.toLowerCase())}
-    />
+      />
+      <button className=" bg-indigo-600 text-white px-6 text-lg font-semibold py-4 rounded-r-md">Go</button>
+    </div>
   );
 };
 
