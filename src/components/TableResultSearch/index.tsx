@@ -1,31 +1,47 @@
 import { useState, useEffect } from "react";
-import CourseList from "@/components/CourseList.tsx";
 import CheckBox from "./CheckBox";
 import "./TableResultSearch.css";
-import SearchInput from "./SearchInput";
-import SearchSuggestion from "../SearchSuggestion";
+
+import CourseList from "../CourseList.tsx";
+import SearchSuggestion1 from "./SearchSuggestion1";
 
 const TableResultSearch = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
+  const [searchTriggered, setSearchTriggered] = useState(false);
+  const [noResults, setNoResults] = useState(false);
+  const [courseNo, setCourseNo] = useState("");
+  const [courseName, setCourseName] = useState("");
+
+  const handleSearch = () => {
+    setSearchTriggered(true);
+    setNoResults(false); // Reset no results state
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:3000/api/courses?q=${query}`);
+      const res = await fetch(`/api/courses?q=${query}`);
       const result = await res.json();
-      setData(result.courses);
+      if (result.courses.length === 0) {
+        setNoResults(true);
+      } else {
+        setData(result.courses);
+        setNoResults(false);
+      }
     };
-    if (query.length === 0 || query.length > 0) fetchData();
-  }, [query]);
+    if (searchTriggered) {
+      fetchData();
+      setSearchTriggered(false); // Reset search trigger
+    }
+  }, [searchTriggered]);
 
   return (
-    <div className="grid-container">
-      <SearchInput query={query} setQuery={setQuery} />
-      <div className="course-list-container">
+    <div>
+      <div className="py-5 font-bold text-2xl">ค้นหาวิชา</div>
+      <SearchSuggestion1 setCourseNo={setCourseNo} setCourseName={setCourseName}/>
+      <CheckBox />
+      <div>
         <CourseList courses={data} />
-      </div>
-      <div className="checkbox-container">
-        <CheckBox />
       </div>
     </div>
   );

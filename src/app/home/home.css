@@ -1,0 +1,16 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-section {
+    background-color: #7f3fbf;
+    flex: 1;
+  }
+  
+  .bottom-section {
+    background-color: rgba(119, 0, 255, 0.66);
+    flex: 1;
+  }
+  

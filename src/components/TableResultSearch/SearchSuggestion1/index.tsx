@@ -11,7 +11,7 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
         const fetchCourses = async () => {
             if (/^\d+$/.test(query)) {  // Check if query contains only numbers
                 try {
-                    const response = await fetch(`http://localhost:3000/api/courses?q=${query}`);
+                    const response = await fetch(`/api/courses?q=${query}`);
                     if (!response.ok) throw new Error('Network response was not ok');
                     const result = await response.json();
                     setCourses(result.courses);
@@ -48,8 +48,8 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
     };
 
     return (
-        <div className="search-bar-container">
-            <div className="input-container">
+        <div className="max-w search-bar-container">
+            <div className="input-container flex flex-row">
                 <input
                     type="text"
                     value={query}
@@ -62,6 +62,10 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
                         &times;
                     </button>
                 )}
+                <button 
+                    className=" search-button bg-indigo-600 text-white px-5 text-lg font-semibold  rounded-r-md">
+                    Go
+                </button>
             </div>
             {query.length > 0 && courses.length > 0 && (
                 <ul className="suggestions-list">
@@ -71,15 +75,10 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
                             className="suggestion-item"
                             onClick={() => handleSelectCourse(course)}
                         >
-                            {course.courseNo}
+                            {course.courseNo} {course.courseName}
                         </li>
                     ))}
                 </ul>
-            )}
-            {selectedCourse && (
-                <div className="selected-course">
-                    <p><strong>Course:</strong> {selectedCourse.courseName}</p>
-                </div>
             )}
         </div>
     );

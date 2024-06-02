@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Checkbox = () => {
 
   return (
-    <div className='flex flex-col p-4 border border-slate-300 my-4'>
+    <div className='flex flex-row p-4 border border-slate-300 my-4'>
     <div>วันที่เรียน</div>
       <label>
         <input

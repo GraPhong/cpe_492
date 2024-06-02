@@ -1,0 +1,25 @@
+.filter-container {
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .filter {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter label {
+    color: #ccc; /* Light text color */
+    margin-bottom: 5px;
+  }
+  
+  .filter select {
+    background-color: #c21818; /* Darker background for select */
+    color: #fff; /* Light text color */
+    border: 1px solid #bb3131;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  

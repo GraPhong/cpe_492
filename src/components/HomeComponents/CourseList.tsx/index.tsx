@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './styles.css';  // Make sure this imports your CSS file
 
 const CourseList = ({ courses }) => {
   const [selectedSections, setSelectedSections] = useState({});
@@ -26,7 +27,7 @@ const CourseList = ({ courses }) => {
         );
 
         return (
-          <div key={course._id} className="p-4 border border-slate-400 my-4">
+          <div key={course._id} className="course-card p-4 border rounded-md border-slate-400 my-4">
             <div className="flex justify-between  ">
               <div className="font-bold text-2xl font-kanit">
                 {course.courseNo} {course.courseName}
