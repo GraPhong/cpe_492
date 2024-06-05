@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
-import './styles.css';  // Make sure this imports your CSS file
+import './styles.css'; 
 
 const CourseList = ({ courses }) => {
   const [selectedSections, setSelectedSections] = useState({});
@@ -28,7 +30,7 @@ const CourseList = ({ courses }) => {
 
         return (
           <div key={course._id} className="course-card p-4 border rounded-md border-slate-400 my-4">
-            <div className="flex justify-between  ">
+            <div className="flex justify-between">
               <div className="font-bold text-2xl font-kanit">
                 {course.courseNo} {course.courseName}
               </div>
@@ -57,17 +59,17 @@ const CourseList = ({ courses }) => {
             </div>
 
             {selectedSection && (
-              <div className="flex flex-col font-kanit">
-                <div>
-                  <strong>Teacher: </strong> 
+              <div className="flex  font-kanit">
+                <div className="flex flex-col">
+                  <strong>Teacher: </strong>{selectedSection.teacher}
                 </div>
-                <div>
+                <div className="flex flex-col ml-10">
                   <strong>Day: </strong> {selectedSection.day}
                 </div>
-                <div>
+                <div className="flex flex-col ml-10">
                   <strong>Time: </strong> {selectedSection.time}
                 </div>
-                <div>
+                <div className="flex flex-col ml-10">
                   <strong>Room: </strong> {selectedSection.room}
                 </div>
               </div>

@@ -4,9 +4,10 @@ import Review from "@/models/review";
 
 export async function PUT(request, { params }) {
   const { id } = params;
-  const { newCourseno: courseNo, newCoursename: courseName, newReview: review, newScore: score, newLike: like} = await request.json();
+  const updateData = await request.json();
+  
   await connectMongoDB();
-  await Review.findByIdAndUpdate(id, { courseNo, courseName, review, score, like });
+  await Review.findByIdAndUpdate(id, updateData, { new: true });
   return NextResponse.json({ message: "Review updated" }, { status: 200 });
 }
 

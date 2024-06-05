@@ -1,25 +1,28 @@
 .filter-container {
-    display: flex;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .filter {
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .filter label {
-    color: #ccc; /* Light text color */
-    margin-bottom: 5px;
-  }
-  
-  .filter select {
-    background-color: #c21818; /* Darker background for select */
-    color: #fff; /* Light text color */
-    border: 1px solid #bb3131;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: slategray; /* Slate color background */
+}
+
+.filter {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter label {
+  color: white; /* Ensure the text is readable */
+  margin-bottom: 5px;
+}
+
+.filter select {
+  background-color: transparent; /* Remove background color */
+  color: black; /* Use black or your preferred text color */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 3px;
+  padding: 5px;
+  appearance: none; /* Remove default styling of select */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

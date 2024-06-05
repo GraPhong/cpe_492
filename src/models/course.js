@@ -14,10 +14,7 @@ const courseSchema = new Schema(
             room: String,
             roomLab: String,
             examTime: String,
-            teacher: [{
-                type: String,
-                fullName: String
-            }],
+            teacher: String,
             coTeachers: [{
                 type: String,
                 fullName: String

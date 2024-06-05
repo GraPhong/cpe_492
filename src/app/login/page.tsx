@@ -1,68 +1,40 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { signIn } from 'next-auth/react'
-import { useRouter, redirect } from 'next/navigation'
-import { useSession } from 'next-auth/react';
+import {GoogleLogin} from 'react-google-login'
+import { gapi } from 'gapi-script'
 
+export default function LoginPage() {
 
-function LoginPage() {
+    const clientId = process.env.CLIENT_ID
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-
-    const router = useRouter();
-
-    const { data: session } = useSession();
-    if (session) router.replace('home');
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-
-            const res = await signIn("credentials", {
-                email, password, redirect: false
+    useEffect(() => {
+        const initClient = () => {
+            gapi.client.init({
+                clentId:clientId,
+                scrope: ''
             })
-
-            if (res.error) {
-                setError("Invalid credentials");
-                return;
-            }
-
-            router.replace("home");
-
-        } catch(error) {
-            console.log(error);
         }
+        gapi.load("client:auth2", initClient)
+    },[])
+
+    const onSuccess = (res) => {
+        console.log('success', res)
     }
 
+    const onFailure = (res) => {
+        console.log('failed', res)
+    }
   return (
-
-    <div className='flex-grow'>
-        <div className="flex justify-center items-center">
-            <div className='w-[400px] bg-purple-200 shadow-xl p-10 mt-5 rounded-xl'>
-                <h3 className='text-3xl'>ลงชื่อเข้าใช้</h3>
-                <hr className='my-3' />
-                <form onSubmit={handleSubmit}>
-                    {error && (
-                        <div className='bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2'>
-                            {error}
-                        </div>
-                    )}
-
-                    <input type="text" onChange={(e) => setEmail(e.target.value)} className='w-full bg-gray-200 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your email' />
-                    <input type="password" onChange={(e) => setPassword(e.target.value)} className='w-full bg-gray-200 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your password' />
-                    <button type='submit' className='bg-green-500 text-white border py-2 px-3 rounded text-lg my-2'>Sign In</button>
-                </form>
-                <hr className='my-3' />
-                <p>ยังไม่มีบัญชีใช่ไหม? <Link href="/register" className='text-blue-500 hover:underline'>ลงทะเบียน</Link></p>
-            </div>
-        </div>
-    </div>
+    <GoogleLogin
+        clientId={clientId}
+        buttonText="Sign in with Google"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        cookiePolicy={'single_host_origin'}
+        isSignedIn={true}
+    />
+        
   )
 }
-
-export default LoginPage

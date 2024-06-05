@@ -19,7 +19,6 @@ const TableResultReview = () => {
 
   return (
     <div className="app">
-      <PostReviewBar/>
       <SearchInput query={query} setQuery={setQuery} />
       <ReviewCard reviews={data} />
     </div>

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import TableReview from '@/components/TableReview'
+import TableReview from '@/components/TableReview/TableReview'
 import SearchBarReview from '@/components/SearchBarReview'
 
 export default function Review() {

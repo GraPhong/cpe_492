@@ -64,17 +64,21 @@ const Navbar = (  ) => {
               <a href={link.link} className='font-bold  text-white  text-2xl underline hover:text-black duration-100'>{link.name}</a>
             ))
           }
-          
+          <a href="/login">
+            <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-100 md:static'>Login</button>
+        </a>
         </ul>
       </div>
 
       {/*mobile menu*/}
       {isMenuOpen ? (
         <ul className='flex flex-col md:hidden px-10'>
-
           {Links.map((link) => (         
               <a href={link.link} className='py-3 text-white text-2xl hover:text-black duration-100'>{link.name}</a>
           ))}
+          <a href="/login">
+            <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-100 md:static'>Login</button>
+          </a>
         </ul>     
       ) : null }
     </nav>

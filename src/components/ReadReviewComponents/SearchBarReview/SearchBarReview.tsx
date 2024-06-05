@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './searchBar.css';
+import './SearchBarReview.css';
 
-const SearchBar = ({ query, setQuery, onSearch }) => {
+const SearchBarReview = ({ query, setQuery, onSearch }) => {
   const [suggestions, setSuggestions] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');  // This will store the actual courseNo for search
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (query.length > 0) {
         const res = await fetch(`http://localhost:3000/api/courses?q=${query}`);
         const result = await res.json();
-        setSuggestions(result.courses);  // Assuming the API returns a list of courses
+        setSuggestions(result.courses);
       } else {
         setSuggestions([]);
       }
@@ -20,8 +20,8 @@ const SearchBar = ({ query, setQuery, onSearch }) => {
   }, [query]);
 
   const handleSuggestionClick = (suggestion) => {
-    setQuery(`${suggestion.courseNo} - ${suggestion.courseName}`);  // Include both courseNo and courseName
-    setSearchQuery(suggestion.courseNo);  // Store the courseNo for search
+    setQuery(`${suggestion.courseNo} - ${suggestion.courseName}`);
+    setSearchQuery(suggestion.courseNo);
     setSuggestions([]);
   };
 
@@ -32,7 +32,7 @@ const SearchBar = ({ query, setQuery, onSearch }) => {
   };
 
   const handleSearch = () => {
-    onSearch(searchQuery);  // Use the courseNo for search
+    onSearch(searchQuery);
   };
 
   return (
@@ -43,10 +43,10 @@ const SearchBar = ({ query, setQuery, onSearch }) => {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            setSearchQuery(e.target.value);  // Update searchQuery to handle manual input as well
+            setSearchQuery(e.target.value);
           }}
           placeholder="Search"
-          className="w-full px-4 py-2 bg-gray-200 text-black rounded-md focus:outline-none search-input"
+          className="w-full px-4 py-2 bg-white text-black rounded-md focus:outline-none search-input"
         />
         {query && (
           <button
@@ -71,7 +71,7 @@ const SearchBar = ({ query, setQuery, onSearch }) => {
               onClick={() => handleSuggestionClick(suggestion)} 
               className="px-4 py-2 cursor-pointer hover:bg-gray-200 suggestion-item"
             >
-              {suggestion.courseNo} - {suggestion.courseName}  {/* Display courseNo and courseName */}
+              {suggestion.courseNo} - {suggestion.courseName}
             </li>
           ))}
         </ul>
@@ -80,4 +80,4 @@ const SearchBar = ({ query, setQuery, onSearch }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBarReview;
