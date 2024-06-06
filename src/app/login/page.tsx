@@ -1,13 +1,14 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
-import {GoogleLogin} from 'react-google-login'
+import {GoogleLogin, GoogleLogout} from 'react-google-login'
 import { gapi } from 'gapi-script'
 
 export default function LoginPage() {
 
-    const clientId = process.env.CLIENT_ID
+    const clientId = "651929140953-lib5roq3u8iubb8af43bhgkeen0mrtmn.apps.googleusercontent.com"
+
+    const [profile, setProfile] = useState(null)
 
     useEffect(() => {
         const initClient = () => {
@@ -20,21 +21,46 @@ export default function LoginPage() {
     },[])
 
     const onSuccess = (res) => {
+        setProfile(res.profileObj)
         console.log('success', res)
     }
 
     const onFailure = (res) => {
         console.log('failed', res)
     }
-  return (
-    <GoogleLogin
-        clientId={clientId}
-        buttonText="Sign in with Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={'single_host_origin'}
-        isSignedIn={true}
-    />
-        
+
+    const logOut = () => {
+        setProfile(null);
+    }
+
+    return (
+        <div className='bg-purple-600 min-h-screen flex flex-col items-center justify-center text-white'>
+            <h2>Google Login</h2>
+            <br/><br/>
+            {profile? (
+                <div>
+                    <img src={profile.imageUrl} alt="user image" />
+                    <h3>User Logged In</h3>
+                    <p>Name: {profile.name}</p>
+                    <p>Email: {profile.email}</p>
+                    <br/>
+                    <br/>
+                    <GoogleLogout 
+                        clientId={clientId} 
+                        buttonText="Log out" 
+                        onLogoutSuccess={logOut}
+                    />
+                </div>
+            ) : (
+                <GoogleLogin
+                clientId={clientId}
+                buttonText="Sign in with Google"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+                />
+            )}
+        </div>     
   )
 }

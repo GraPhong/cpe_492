@@ -4,13 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import StarRating from "@/components/StarRating";
-import SearchSuggestion from "@/components/SearchSuggestion";
+import SearchBarReview from "@/components/AddReviewComponents/SearchBarReview/SearchBarReview";
 
 export default function AddReview() {
   const [courseNo, setCourseNo] = useState("");
   const [courseName, setCourseName] = useState("");
   const [review, setReview] = useState("");
-  const [score, setScore] = useState(0); // Initialize score as a number
+  const [score, setScore] = useState(0); 
+  const [query, setQuery] = useState(""); 
   const like = 0;
 
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function AddReview() {
     e.preventDefault();
 
     if (!courseNo || !courseName || !review || !score) {
-      alert("Data are required.");
+      alert("All fields are required.");
       return;
     }
 
@@ -33,7 +34,8 @@ export default function AddReview() {
       });
 
       if (res.ok) {
-        router.push("/review");
+        alert("Review has been added.");
+        router.push("/readreview");
       } else {
         throw new Error("Failed to create a review");
       }
@@ -43,41 +45,44 @@ export default function AddReview() {
   };
 
   return (
-    <div className='max-w-3xl mx-auto p-4'>
-      <div className="py-5">
-        <SearchSuggestion setCourseNo={setCourseNo} setCourseName={setCourseName}/>
+    <div className="bg-purple-600 min-h-screen flex flex-col items-center">
+      <div className="mt-8 max-w-5xl w-full p-4 px-25">
+        <div className="py-5 ">
+          <SearchBarReview 
+            query={query} // Pass query state
+            setQuery={setQuery} // Pass setQuery function
+            setCourseNo={setCourseNo} 
+            setCourseName={setCourseName} 
+          />
+        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 py-5">
+          <div className="font-bold text-white">อยากบอกอะไรให้คนอื่นได้รู้</div>
+          <textarea
+            onChange={(e) => setReview(e.target.value)}
+            value={review}
+            className="border rounded-lg px-8 py-2 h-40"
+            placeholder="Review"
+          ></textarea>
+          <div className="flex text-white">
+            คุณอยากให้คะแนนภาพรวมวิชานี้ 
+            <StarRating setScore={setScore} />
+          </div>
+          <div className="flex text-white">
+            คุณอยากให้คะแนนผู้สอน
+            <StarRating setScore={setScore} />
+          </div>
+          <div className="flex text-white">
+            คุณอยากให้คะแนนความสนุก
+            <StarRating setScore={setScore} />
+          </div>
+          <button
+            type="submit"
+            className="bg-green-600 rounded-lg font-bold text-white py-3 px-6 w-fit mt-3"
+          >
+            Add Review
+          </button>
+        </form>
       </div>
-      
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 py-5">
-        <div className="font-bold">อยากบอกอะไรให้คนอื่นได้รู้</div>
-        <textarea
-          onChange={(e) => setReview(e.target.value)}
-          value={review}
-          className="border border-slate-500 px-8 py-2 h-40"
-          placeholder="Review"
-        ></textarea>
-
-        <div className="flex">
-          คุณอยากให้คะแนนภาพรวมวิชานี้ 
-          <StarRating setScore={setScore} />
-        </div>
-        <div className="flex">
-          คุณอยากให้คะแนนผู้สอน
-          <StarRating setScore={setScore} />
-        </div>
-
-        <div className="flex">
-          คุณอยากให้คะแนนความสนุก
-          <StarRating setScore={setScore} />
-        </div>
-
-        <button
-          type="submit"
-          className="bg-green-600 font-bold text-white py-3 px-6 w-fit mt-3"
-        >
-          Add Review
-        </button>
-      </form>
     </div>
   );
 }

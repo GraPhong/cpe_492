@@ -2,7 +2,7 @@
 import TimeTable from '@/components/TimeTableComponents/TimeTable';
 import React, { useState } from 'react';
 
-export default function Table() {
+export default function Test() {
 
   return (
     <div>      

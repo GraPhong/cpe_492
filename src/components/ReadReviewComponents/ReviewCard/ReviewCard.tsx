@@ -24,7 +24,15 @@ const ReviewCard = ({ courseNo }) => {
   return (
     <div>
       {notFound ? (
-        <div className="text-white text-xl">Not Found</div>
+        <div className="text-white text-xl   justify-center">
+          <div>Not Found</div>
+          <img 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggA0S-OT1nVcHngaZ_-Ak3dFxxKyM4Js4c_o8te0gL2QjyhXsfkzHxhszMkGbB1rbUUSPSSHf-WxzSnYkL0mnYg9qlLfcfL02A9sqWUIasDJpAwmuDygQGmFbKylEPgpQyHLa5tb3lHw3F/s400/syuwa_tsuujinai.png" 
+            alt="Not Found" 
+            style={{ width: '30%', height: 'auto' }}
+          />
+        </div>
+
       ) : (
         reviews.map((t) => (
           <div

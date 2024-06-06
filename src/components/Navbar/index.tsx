@@ -2,11 +2,13 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link';
+import Model from '../PopUp/PopUp';
+import PopUp from '../PopUp/PopUp';
 
 const Navbar = (  ) => {
   const Links =[
     {name:"ค้นหาวิชา",link:"/home"},
-    {name:"รีวิว",link:"/review"},
+    {name:"รีวิว",link:"/readreview"},
     {name:"ตารางเรียน",link:"/table"},
   ];
 
@@ -64,9 +66,12 @@ const Navbar = (  ) => {
               <a href={link.link} className='font-bold  text-white  text-2xl underline hover:text-black duration-100'>{link.name}</a>
             ))
           }
+          <a href="/addReview">
+            <button className='btn bg-green-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-100 md:static'>เขียนรีวิว</button>
+          </a>
           <a href="/login">
             <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-100 md:static'>Login</button>
-        </a>
+          </a>
         </ul>
       </div>
 

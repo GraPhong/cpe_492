@@ -41,18 +41,12 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
-      <div className="top-section">
-        <div className='mt-8 max-w-5xl mx-auto relative'>
-          <div className='font-bold text-2xl text-white py-2'>ค้นหาวิชา</div>
+    <div className='bg-purple-600 min-h-screen flex flex-col items-center'>
+      <div className='mt-8 max-w-5xl w-full p-4'>
+        <div>
+          <div className='font-bold text-2xl text-white py-2'>ค้นหารีวิว</div>
           <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
-          <div className='py-2'>
-            <SearchFilter onFilterChange={handleFilterChange} onSearchClick={handleSearchClick} />
-          </div>
-        </div>
-      </div>
-      <div className="bottom-section">
-        <div className='mt-8 max-w-5xl mx-auto'>
+          <SearchFilter onFilterChange={handleFilterChange} onSearchClick={handleSearchClick} />
           <CourseList courses={data}/>
         </div>
       </div>

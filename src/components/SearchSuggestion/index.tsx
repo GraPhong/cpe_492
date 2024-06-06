@@ -9,7 +9,7 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
 
     useEffect(() => {
         const fetchCourses = async () => {
-            if (/^\d+$/.test(query)) {  // Check if query contains only numbers
+            if (/^\d+$/.test(query)) {  
                 try {
                     const response = await fetch(`http://localhost:3000/api/courses?q=${query}`);
                     if (!response.ok) throw new Error('Network response was not ok');
@@ -19,7 +19,7 @@ const SearchSuggestion = ({ setCourseNo, setCourseName }) => {
                     console.error('Error fetching courses:', error);
                 }
             } else {
-                setCourses([]);  // Clear courses if query is not a number
+                setCourses([]);  
             }
         };
 
