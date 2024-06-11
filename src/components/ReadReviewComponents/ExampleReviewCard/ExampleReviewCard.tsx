@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import StarRating from './StarRating';  
 import LikeButton from "@/components/ReviewComponents/ReviewCard/LikeButton[id]";
 
-
 const getReviews = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/reviews", {
@@ -19,7 +18,7 @@ const getReviews = async () => {
   }
 };
 
-export default function ExampleReviewCard() {
+export default function ExampleReviewCard({ onCourseClick }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -39,10 +38,15 @@ export default function ExampleReviewCard() {
       {reviews.map((t) => (
         <div
           key={t._id}
-          className="p-4 border bg-green-300 rounded-lg border-slate-300 my-3 flex justify-between gap-5 items-start"
+          className="p-4 border bg-purple-200 rounded-lg border-slate-300 my-3 flex justify-between gap-5 items-start"
         >
           <div>
-            <h2 className="font-bold text-xl">{t.courseNo} {t.courseName}</h2>
+            <h2 
+              className="font-bold text-xl cursor-pointer text-black hover:underline" 
+              onClick={() => onCourseClick(t.courseNo)}
+            >
+              {t.courseNo} {t.courseName}
+            </h2>
             <StarRating score={t.score} /> 
             <div>{t.review}</div>
           </div>

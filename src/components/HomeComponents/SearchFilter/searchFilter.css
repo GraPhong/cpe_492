@@ -1,8 +1,8 @@
 .filter-container {
   display: flex;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
-  background-color: slategray; /* Slate color background */
+  background-color: slategray; 
 }
 
 .filter {
@@ -12,17 +12,17 @@
 }
 
 .filter label {
-  color: white; /* Ensure the text is readable */
+  color: white; 
   margin-bottom: 5px;
 }
 
 .filter select {
-  background-color: transparent; /* Remove background color */
-  color: black; /* Use black or your preferred text color */
-  border: 1px solid #ccc; /* Light border */
+  background-color: transparent; 
+  color: black; 
+  border: 1px solid #ccc;
   border-radius: 3px;
   padding: 5px;
-  appearance: none; /* Remove default styling of select */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import AddButton from './AddButton'; 
 import './styles.css'; 
 
 const CourseList = ({ courses }) => {
@@ -34,9 +35,7 @@ const CourseList = ({ courses }) => {
               <div className="font-bold text-2xl font-kanit">
                 {course.courseNo} {course.courseName}
               </div>
-              <button className="bg-green-600 text-white font-semibold px-3 py-1 rounded w-20 h-10">
-                Add
-              </button>
+              <AddButton course={course} selectedSection={selectedSection} /> 
             </div>
 
             <div className="my-2 font-kanit">
@@ -59,7 +58,7 @@ const CourseList = ({ courses }) => {
             </div>
 
             {selectedSection && (
-              <div className="flex  font-kanit">
+              <div className="flex font-kanit">
                 <div className="flex flex-col">
                   <strong>Teacher: </strong>{selectedSection.teacher}
                 </div>

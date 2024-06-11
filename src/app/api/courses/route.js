@@ -7,11 +7,10 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get('q');
 
-  const keys = ["courseNo", "courseName"];
-
   const search = (data) => {
+    const regex = new RegExp(`^${q}`, 'i');  // Regular expression to match from the beginning
     return data.filter((item) =>
-      keys.some((key) => item[key].toLowerCase().includes(q.toLowerCase()))
+      ["courseNo", "courseName"].some((key) => regex.test(item[key]))
     );
   };
 
@@ -20,4 +19,3 @@ export async function GET(req) {
 
   return NextResponse.json({ courses: result });
 }
-

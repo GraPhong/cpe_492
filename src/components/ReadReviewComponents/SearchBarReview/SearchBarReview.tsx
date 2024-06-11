@@ -45,7 +45,7 @@ const SearchBarReview = ({ query, setQuery, onSearch }) => {
             setQuery(e.target.value);
             setSearchQuery(e.target.value);
           }}
-          placeholder="Search"
+          placeholder="รหัสวิชา..."
           className="w-full px-4 py-2 bg-white text-black rounded-md focus:outline-none search-input"
         />
         {query && (

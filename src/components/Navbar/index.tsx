@@ -20,7 +20,7 @@ const Navbar = (  ) => {
   return (
     <nav className='bg-purple-500 p-4'>
       <div className="flex item-center justify-between">
-      <Link className="px-10 text-4xl font-bold font-kanit text-white" href={"home"}>CMU Assist</Link>
+      <Link className="px-10 text-4xl font-bold font-kanit text-white" href={"home"}>CMU GE</Link>
         
         {/* hamberger menu */}
         <div className="md:hidden">

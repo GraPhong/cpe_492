@@ -6,7 +6,7 @@ const StarRating = ({ setScore }) => {
 
   const handleClick = (index) => {
     setRating(index);
-    setScore(index); // Update the parent component's score
+    setScore(index);
   };
 
   return (

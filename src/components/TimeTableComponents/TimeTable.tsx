@@ -1,33 +1,45 @@
-import React from 'react';
-import CourseBox from './CourseBox';
-
-const days = [
-  { name: 'Monday', width: '20vh', backgroundColor: 'bg-yellow-400' },
-  { name: 'Tuesday', width: '20vh', backgroundColor: 'bg-pink-400' },
-  { name: 'Wednesday', width: '20vh', backgroundColor: 'bg-green-400' },
-  { name: 'Thursday', width: '20vh', backgroundColor: 'bg-orange-400' },
-  { name: 'Friday', width: '20vh', backgroundColor: 'bg-sky-400' },
-  { name: 'Saturday', width: '20vh', backgroundColor: 'bg-purple-400' },
-  { name: 'Sunday', width: '20vh', backgroundColor: 'bg-red-400' },
-];
+import React, { useState, useEffect } from 'react';
+import Day from './Day';
 
 const TimeTable = () => {
+  const [courses, setCourses] = useState([]);
+
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/tables');
+      if (response.ok) {
+        const data = await response.json();
+        setCourses(data.tables);
+      } else {
+        console.error('Failed to fetch courses');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const handleRemoveCourse = (id) => {
+    setCourses(courses.filter(course => course._id !== id));
+  };
+
+  const days = [
+    { name: 'Monday', shortName: 'MTh', headerColor: 'bg-yellow-400' },
+    { name: 'Tuesday', shortName: 'TuF', headerColor: 'bg-pink-400' },
+    { name: 'Wednesday', shortName: 'We', headerColor: 'bg-green-400' },
+    { name: 'Thursday', shortName: 'MTh', headerColor: 'bg-orange-400' },
+    { name: 'Friday', shortName: 'TuF', headerColor: 'bg-purple-400' },
+    { name: 'Saturday', shortName: 'Sa', headerColor: 'bg-blue-400' },
+    { name: 'Sunday', shortName: 'Su', headerColor: 'bg-red-400' },
+  ];
+
   return (
     <div className="py-10 grid grid-cols-7 gap-x-3">
       {days.map((day, index) => (
-        <div key={index} className="flex flex-col items-center justify-center space-y-0">
-          <div
-            className={`h-[10vh] w-[25vh] rounded-lg border-2 flex items-center justify-center ${day.backgroundColor}`}
-          >
-            <div className="text-slate-700 text-2xl font-kanit font-bold">{day.name}</div>
-          </div>
-          <div className='h-[80vh] w-[25vh]  border-l-2  border-black flex flex-col items-center p-1 space-y-0'> 
-            <CourseBox />
-            <CourseBox />  
-            <CourseBox />
-            <CourseBox />        
-          </div>
-        </div>
+        <Day key={index} day={day} courses={courses} onRemoveCourse={handleRemoveCourse} />
       ))}
     </div>
   );

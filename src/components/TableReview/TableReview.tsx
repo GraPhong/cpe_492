@@ -40,7 +40,6 @@ const TableReview = () => {
         throw new Error("Failed to update ");
       }
 
-      // Update the local state to reflect the new like count
       setData(prevData => prevData.map(review => 
         review._id === id ? { ...review, like: review.like + 1 } : review
       ));
