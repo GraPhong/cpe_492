@@ -1,29 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '@/context/UserContext';
 import Day from './Day';
 
 const TimeTable = () => {
+  const { profile } = useContext(UserContext);
   const [courses, setCourses] = useState([]);
 
   const fetchCourses = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api/tables');
-      if (response.ok) {
-        const data = await response.json();
-        setCourses(data.tables);
-      } else {
-        console.error('Failed to fetch courses');
+    if (profile) {
+      try {
+        const response = await fetch('/api/tables');
+        if (response.ok) {
+          const data = await response.json();
+          setCourses(data.tables);
+        } else {
+          console.error('Failed to fetch courses');
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
+    } else {
+      const storedCourses = JSON.parse(localStorage.getItem('courses')) || [];
+      setCourses(storedCourses);
     }
   };
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [profile]);
 
   const handleRemoveCourse = (id) => {
-    setCourses(courses.filter(course => course._id !== id));
+    if (profile) {
+      setCourses(courses.filter(course => course._id !== id));
+    } else {
+      const updatedCourses = courses.filter(course => course._id !== id);
+      localStorage.setItem('courses', JSON.stringify(updatedCourses));
+      setCourses(updatedCourses);
+    }
   };
 
   const days = [

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '@/context/UserContext';
 
 const colors = [
   "bg-slate-200",
@@ -11,6 +12,8 @@ const colors = [
 ];
 
 const AddButton = ({ course, selectedSection }) => {
+  const { profile } = useContext(UserContext);
+
   const handleAddCourse = async () => {
     let colorIndex = parseInt(localStorage.getItem('colorIndex')) || 0;
     const courseColor = colors[colorIndex];
@@ -26,29 +29,35 @@ const AddButton = ({ course, selectedSection }) => {
       color: courseColor,
     };
 
-    try {
-      const response = await fetch('/api/tables', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(courseData),
-      });
+    if (profile) {
+      try {
+        const response = await fetch('/api/tables', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(courseData),
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to add course');
+        if (!response.ok) {
+          throw new Error('Failed to add course');
+        }
+
+        const result = await response.json();
+        alert('Course added successfully!');
+      } catch (error) {
+        console.error('Error adding course:', error);
+        alert('Failed to add course');
       }
-
-      const result = await response.json();
-      alert('Course added successfully!');
-
-      colorIndex = (colorIndex + 1) % colors.length;
-      localStorage.setItem('colorIndex', colorIndex);
-
-    } catch (error) {
-      console.error('Error adding course:', error);
-      alert('Failed to add course');
+    } else {
+      const storedCourses = JSON.parse(localStorage.getItem('courses')) || [];
+      storedCourses.push(courseData);
+      localStorage.setItem('courses', JSON.stringify(storedCourses));
+      alert('Course added successfully!!!');
     }
+
+    colorIndex = (colorIndex + 1) % colors.length;
+    localStorage.setItem('colorIndex', colorIndex);
   };
 
   return (
