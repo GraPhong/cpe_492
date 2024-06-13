@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const Links = [
         { name: "ค้นหาวิชา", link: "/home" },
-        { name: "รีวิว", link: "/readreview" },
+        { name: "รีวิว", link: "/review" },
         { name: "ตารางเรียน", link: "/table" },
     ];
 

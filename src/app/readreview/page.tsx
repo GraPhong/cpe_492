@@ -2,11 +2,10 @@
 import ReviewCard from '@/components/ReadReviewComponents/ReviewCard/ReviewCard';
 import SearchBarReview from '@/components/ReadReviewComponents/SearchBarReview/SearchBarReview';
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import ExampleReviewCard from '@/components/ReadReviewComponents/ExampleReviewCard/ExampleReviewCard';
-import TopReviewCourse from '@/components/ReadReviewComponents/TopReviewCourse';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function ReadReview() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   const [courseNo, setCourseNo] = useState(null);
@@ -20,6 +19,7 @@ export default function ReadReview() {
 
   const handleSearch = (courseNo) => {
     setCourseNo(courseNo);
+    router.push(`/readreview?courseNo=${courseNo}`);
   };
 
   return (
@@ -28,20 +28,7 @@ export default function ReadReview() {
         <div>
           <div className='font-bold text-2xl text-white py-2'>ค้นหารีวิว</div>
           <SearchBarReview query={query} setQuery={setQuery} onSearch={handleSearch} />
-          {!courseNo ? (
-            <>
-              <div className='py-4 text-white text-bold font-kanit text-2xl'>Top 6 Most Liked Reivew</div>
-              <div className='grid grid-cols-3 gap-4'>
-                <ExampleReviewCard onCourseClick={handleSearch} />
-              </div>
-              <div className='py-4 text-white text-bold font-kanit text-2xl'>The 6 Most Reviewed Course</div>
-              <div className='grid grid-cols-3 gap-4'>
-                <TopReviewCourse onCourseClick={handleSearch} />
-              </div>
-            </>
-          ) : (
-            <ReviewCard courseNo={courseNo} />
-          )}
+          {courseNo && <ReviewCard courseNo={courseNo} />}
         </div>
       </div>
     </div>
