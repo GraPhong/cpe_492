@@ -2,8 +2,8 @@
 import SearchBarReview from '@/components/ReadReviewComponents/SearchBarReview/SearchBarReview';
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import ExampleReviewCard from '@/components/ReadReviewComponents/ExampleReviewCard/ExampleReviewCard';
-import TopReviewCourse from '@/components/ReadReviewComponents/TopReviewCourse';
+import ExampleReviewCard from '@/components/ReviewComponents/ExampleReviewCard/ExampleReviewCard';
+import TopReviewCourse from '@/components/ReviewComponents/TopReviewCourse';
 
 export default function Review() {
   const searchParams = useSearchParams();

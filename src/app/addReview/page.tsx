@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import StarRating from "@/components/StarRating";
+import StarRating from "@/components/AddReviewComponents/StarRating";
 import SearchBarReview from "@/components/AddReviewComponents/SearchBarReview/SearchBarReview";
 
 export default function AddReview() {

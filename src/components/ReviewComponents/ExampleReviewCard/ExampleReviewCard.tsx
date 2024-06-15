@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StarRating from './StarRating';  
+import StarRating from '../../StarRating';  
 import LikeButton from "@/components/ReviewComponents/ReviewCard/LikeButton[id]";
 
 const getReviews = async () => {
@@ -52,7 +52,7 @@ export default function ExampleReviewCard({ onCourseClick }) {
           </div>
 
           <div className="flex gap-2 items-center">
-            <LikeButton like={t.like} />
+            <LikeButton like={t.like} reviewId={t._id} />
           </div>
         </div>
       ))}
